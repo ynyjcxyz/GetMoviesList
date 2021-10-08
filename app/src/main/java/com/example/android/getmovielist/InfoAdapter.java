@@ -1,5 +1,6 @@
 package com.example.android.getmovielist;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ public class InfoAdapter extends ArrayAdapter<ProductInfo> {
     public InfoAdapter(Activity context, ArrayList<ProductInfo> productInfo) {
         super(context, 0, productInfo);
     }
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         View listItemView = convertView;
@@ -24,7 +26,6 @@ public class InfoAdapter extends ArrayAdapter<ProductInfo> {
         ProductInfo currentProductInfo = getItem(position);
 
         ImageView imageView = (ImageView)listItemView.findViewById(R.id.company_logo);
-
         if(currentProductInfo.getLogoPath() != null){
         String url = "https://image.tmdb.org/t/p/w500" + currentProductInfo.getLogoPath();
         Glide.with(parent).load(url).into(imageView);
@@ -36,7 +37,13 @@ public class InfoAdapter extends ArrayAdapter<ProductInfo> {
         companyName.setText(currentProductInfo.getCompanyName());
 
         TextView originCountry = listItemView.findViewById(R.id.origin_country);
-        originCountry.setText(currentProductInfo.getOriginCountry());
+        String OriginCountryName = currentProductInfo.getOriginCountry();
+        if(OriginCountryName != null) {
+            String countryWithFlag = CountryFlags.getCountryFlagByCountryCode(OriginCountryName);
+            originCountry.setText(countryWithFlag + OriginCountryName);
+        }else{
+            originCountry.setText("WE ARE SORRY, THERE IS NO DATA");
+        }
 
         return listItemView;
     }
