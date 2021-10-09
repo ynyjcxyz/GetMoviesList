@@ -15,7 +15,9 @@
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F8F8F3"
+            android:divider="#00B0FF"
+            android:dividerHeight="1dp"
+            android:background="#D5D2B9"
             android:orientation="vertical" />
     </LinearLayout>
 

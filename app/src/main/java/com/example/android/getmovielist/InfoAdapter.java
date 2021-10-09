@@ -29,24 +29,16 @@ public class InfoAdapter extends ArrayAdapter<ProductInfo> {
         ProductInfo currentProductInfo = getItem(position);
 
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.company_logo);
-        if (currentProductInfo.getLogoPath() != null) {
-            String url = "https://image.tmdb.org/t/p/w500" + currentProductInfo.getLogoPath();
-            Glide.with(parent).load(url).into(imageView);
-        } else {
-            Glide.with(parent).load(R.drawable.no_data).into(imageView);
-        }
+        String url = "https://image.tmdb.org/t/p/w500" + currentProductInfo.getLogoPath();
+        Glide.with(parent).load(url).error(R.drawable.no_data).into(imageView);
 
         TextView companyName = listItemView.findViewById(R.id.company_name);
         companyName.setText(currentProductInfo.getCompanyName());
 
         TextView originCountry = listItemView.findViewById(R.id.origin_country);
         String OriginCountryName = currentProductInfo.getOriginCountry();
-        if (OriginCountryName != null) {
-            String countryWithFlag = CountryFlags.getCountryFlagByCountryCode(OriginCountryName);
-            originCountry.setText(countryWithFlag + " " + OriginCountryName);
-        } else {
-            originCountry.setText("SORRY, THERE IS NO DATA");
-        }
+        String countryWithFlag = CountryFlags.getCountryFlagByCountryCode(OriginCountryName);
+        originCountry.setText(countryWithFlag + " " + OriginCountryName);
 
         return listItemView;
     }

@@ -125,7 +125,7 @@ public class CountryFlags {
         if (countryCode.length() == 2) {
             flag = getCodeByCharacter(countryCode.charAt(0)) + getCodeByCharacter(countryCode.charAt(1));
         } else {
-            flag = "";
+            flag = new String(Character.toChars(Integer.parseInt("26D4", 16)));
         }
         return flag;
     }
