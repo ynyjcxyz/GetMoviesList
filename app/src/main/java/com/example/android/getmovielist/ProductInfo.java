@@ -1,9 +1,11 @@
 package com.example.android.getmovielist;
 
 import androidx.annotation.Nullable;
-
 import com.google.auto.value.AutoValue;
 import com.google.gson.annotations.SerializedName;
+import com.ryanharter.auto.value.gson.GenerateTypeAdapter;
+
+@GenerateTypeAdapter
 @AutoValue
 public abstract class ProductInfo {
     @Nullable
