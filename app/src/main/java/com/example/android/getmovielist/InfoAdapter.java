@@ -8,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class InfoAdapter extends ArrayAdapter<ProductInfo> {
-    public InfoAdapter(Activity context, ArrayList<ProductInfo> productInfo) {
+    public InfoAdapter(Activity context, List<ProductInfo> productInfo) {
         super(context, 0, productInfo);
     }
 
@@ -29,14 +27,15 @@ public class InfoAdapter extends ArrayAdapter<ProductInfo> {
         ProductInfo currentProductInfo = getItem(position);
 
         ImageView imageView = (ImageView) listItemView.findViewById(R.id.company_logo);
-        String url = "https://image.tmdb.org/t/p/w500" + currentProductInfo.getLogoPath();
+        String url = "https://image.tmdb.org/t/p/w500" + currentProductInfo.logoPath();
         Glide.with(parent).load(url).error(R.drawable.no_data).into(imageView);
 
         TextView companyName = listItemView.findViewById(R.id.company_name);
-        companyName.setText(currentProductInfo.getCompanyName());
+        companyName.setText(currentProductInfo.companyName());
 
         TextView originCountry = listItemView.findViewById(R.id.origin_country);
-        String OriginCountryName = currentProductInfo.getOriginCountry();
+        String OriginCountryName = currentProductInfo.originCountry();
+        assert OriginCountryName != null;
         String countryWithFlag = CountryFlags.getCountryFlagByCountryCode(OriginCountryName);
         originCountry.setText(countryWithFlag + " " + OriginCountryName);
 
